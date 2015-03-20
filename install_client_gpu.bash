@@ -2,7 +2,7 @@
 #host_descriptor_file=/subuser/hostdata/host_descriptor.json
 #nvidia_version=`cat $host_descriptor_file | grep nvidia | awk '{print $3}'`
 nvidia_version=`dmesg | grep "NVIDIA UNIX" | awk '{print $10}'`
-nvidia_bin=/tmp/hostdata/driver-$nvidia_version.run
+nvidia_bin=/tmp/driver-$nvidia_version.run
 
 if test ! -f $nvidia_bin; then
     nvidia_driver_uri=http://us.download.nvidia.com/XFree86/Linux-x86_64/${nvidia_version}/NVIDIA-Linux-x86_64-${nvidia_version}.run
@@ -16,5 +16,3 @@ apt-get install -y binutils mesa-utils module-init-tools
 sh $nvidia_bin -a -N --ui=none --no-kernel-module -q
 
 #rm $nvidia_bin
-
-
